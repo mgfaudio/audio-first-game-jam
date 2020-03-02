@@ -1,0 +1,63 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Footstepper : MonoBehaviour
+{
+    public AudioClip[] dirt_steps, pebble_steps;
+    // Start is called before the first frame update
+    AudioSource step_source; 
+    void Start()
+    {
+        step_source = gameObject.AddComponent<AudioSource>();
+        step_source.volume = 1f;
+        step_source.spatialBlend = 1f;
+        step_source.spread = 360;
+        rand_num = 0;
+        last_rand = 1;
+    }
+
+    private int rand_num, last_rand;
+
+   public void TriggerStepSound(bool is_pebble)
+    {
+
+        if (is_pebble)
+        {
+            rand_num = UnityEngine.Random.Range(0,pebble_steps.Length-1);
+            while(rand_num == last_rand)
+            {
+                rand_num = UnityEngine.Random.Range(0,pebble_steps.Length-1);
+            }
+            last_rand = rand_num;
+            step_source.clip = pebble_steps[rand_num];
+            step_source.Play();
+        }
+        else
+        {
+            rand_num = UnityEngine.Random.Range(0, dirt_steps.Length-1);
+            while(rand_num == last_rand)
+            {
+                rand_num = UnityEngine.Random.Range(0,dirt_steps.Length-1);
+            }  
+            last_rand = rand_num;          
+            step_source.clip = dirt_steps[rand_num];
+            step_source.Play();
+        }
+    }
+
+
+
+    // Update is called once per frame
+
+    float counter = 0;
+    void Update()
+    {
+        //counter += Time.deltaTime;
+       // if (counter > 0.5f)
+       // {
+       //     TriggerStepSound(true);
+      //      counter = 0;
+       // }
+    }
+}
