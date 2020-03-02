@@ -46,18 +46,4 @@ public class Footstepper : MonoBehaviour
         }
     }
 
-
-
-    // Update is called once per frame
-
-    float counter = 0;
-    void Update()
-    {
-        //counter += Time.deltaTime;
-       // if (counter > 0.5f)
-       // {
-       //     TriggerStepSound(true);
-      //      counter = 0;
-       // }
-    }
 }
