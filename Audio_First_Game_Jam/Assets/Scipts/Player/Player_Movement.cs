@@ -12,20 +12,20 @@ public class Player_Movement : MonoBehaviour
     public float groundDist = 0.1f;
     public float yVelocity = 0f;
 
-    public LayerMask groundMask;
-    public BoxCollider playerCol;
-    public Transform groundCheck;
-    public Transform rifleParent;
+    //public LayerMask groundMask;
+    //public BoxCollider playerCol;
+    //public Transform groundCheck;
+    //public Transform rifleParent;
     public Camera playerCamera;
 
-    private bool isGrounded = true;
-    private float currentPitch = 0;
+    //private bool isGrounded = true;
+    //private float currentPitch = 0;
     private float xAxisClamp = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerCol = GetComponent<BoxCollider>();
+        //playerCol = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class Player_Movement : MonoBehaviour
 
         MovePlayer();
         RotatePlayer();
-        GravityPull();
+        //GravityPull();
         PitchCamera();
     }
 
@@ -51,7 +51,7 @@ public class Player_Movement : MonoBehaviour
             transform.position += transform.forward * Time.deltaTime * playerVel * Input.GetAxis("Vertical");
         }
 
-        if (Input.GetKeyDown("space") && IsGrounded())
+        if (Input.GetKeyDown("space"))
         {
             yVelocity = Mathf.Sqrt(jumpForce * -2 * -gravity);
         }
@@ -82,27 +82,27 @@ public class Player_Movement : MonoBehaviour
         float cameraPitch = 1f * Input.GetAxis("Mouse Y");
 
         Vector3 cameraRotation = playerCamera.transform.rotation.eulerAngles;
-        Vector3 rifleRotation = rifleParent.transform.rotation.eulerAngles;
+        //Vector3 rifleRotation = rifleParent.transform.rotation.eulerAngles;
 
         cameraRotation.x -= cameraPitch;
-        rifleRotation.x -= cameraPitch;
+        //rifleRotation.x -= cameraPitch;
         xAxisClamp -= cameraPitch;
 
         if (xAxisClamp > 70)
         {
             xAxisClamp = 70;
             cameraRotation.x = 70;
-            rifleRotation.x = 70;
+            //rifleRotation.x = 70;
         }
         else if (xAxisClamp < -90)
         {
             xAxisClamp = -90;
             cameraRotation.x = -90;
-            rifleRotation.x = -90;
+            //rifleRotation.x = -90;
         }
 
         playerCamera.transform.rotation = Quaternion.Euler(cameraRotation);
-        rifleParent.transform.rotation = Quaternion.Euler(rifleRotation);
+        //rifleParent.transform.rotation = Quaternion.Euler(rifleRotation);
     }
 
     /*private bool IsGrounded()
