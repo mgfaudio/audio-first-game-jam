@@ -12,9 +12,9 @@ public class Player_Movement : MonoBehaviour
     public float groundDist = 0.1f;
     public float yVelocity = 0f;
 
-    //public LayerMask groundMask;
+    public LayerMask groundMask;
     //public BoxCollider playerCol;
-    //public Transform groundCheck;
+    public Transform groundCheck;
     //public Transform rifleParent;
     public Camera playerCamera;
 
@@ -23,10 +23,6 @@ public class Player_Movement : MonoBehaviour
     private float xAxisClamp = 0;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        //playerCol = GetComponent<BoxCollider>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -37,6 +33,11 @@ public class Player_Movement : MonoBehaviour
         RotatePlayer();
         //GravityPull();
         PitchCamera();
+    }
+
+    private void FixedUpdate()
+    {
+        GravityPull();
     }
 
     void MovePlayer()
@@ -65,7 +66,7 @@ public class Player_Movement : MonoBehaviour
         transform.Rotate(0, yaw, 0);
     }
 
-    /*void GravityPull()
+    void GravityPull()
     {
         if (!IsGrounded())
         {
@@ -75,7 +76,7 @@ public class Player_Movement : MonoBehaviour
         {
             yVelocity = 0f;
         }
-    }*/
+    }
 
     void PitchCamera()
     {
@@ -105,8 +106,8 @@ public class Player_Movement : MonoBehaviour
         //rifleParent.transform.rotation = Quaternion.Euler(rifleRotation);
     }
 
-    /*private bool IsGrounded()
+    private bool IsGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
-    }*/
+    }
 }
